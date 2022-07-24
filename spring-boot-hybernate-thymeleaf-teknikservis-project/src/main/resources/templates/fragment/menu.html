@@ -1,0 +1,13 @@
+<div xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" th:fragment="menu"
+th:with="url=${#httpServletRequest.requestURI}">
+    <label class="form-label" sec:authorize="isAuthenticated()" th:text="${#authentication.getPrincipal().getUsername()}"></label>
+    <a href="/booking" class="page-link" sec:authorize="isAuthenticated() AND hasRole('USER')">Randevu Al veya Görüntüle</a>
+    <a href="/booking/list" class="page-link" sec:authorize="isAuthenticated() AND hasRole('ADMIN')">Randevu Kontrol</a>
+    <a href="/sale/add" class="page-link" sec:authorize="isAuthenticated() AND hasRole('ADMIN')">Satış Kaydet</a>
+    <a href="/buy" class="page-link" sec:authorize="isAuthenticated() AND hasRole('USER')">Satış Görüntüle</a>
+    <a href="/proposal" class="page-link" sec:authorize="isAuthenticated() AND hasRole('USER')">Teklif ver</a>
+    <a href="/proposalVerify" class="page-link" sec:authorize="isAuthenticated() AND hasRole('ADMIN')">Teklif g�r</a>
+	<a href="/login" sec:authorize="!isAuthenticated()" class="page-link" th:text="#{site.login}"></a>
+    <a href="/logout" sec:authorize="isAuthenticated()" class="page-link" th:text="#{site.logout}"></a>
+ 
+</div>

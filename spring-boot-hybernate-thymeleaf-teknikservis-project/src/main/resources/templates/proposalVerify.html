@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Sale</title>
+<link href="/css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-2">
+				<!-- menuyu replace etmek için -->
+				<div th:replace="fragment/menu.html :: menu"></div>
+			</div>
+
+			<div class="col-10">
+				<div class="card shadow">
+					<div class="card-body">
+						<table class="table table-striped table-bordered">
+							<thead class="table-dark">
+								<tr>
+									<th scope="col" class="col-auto">product</th>
+									<th scope="col" class="col-auto">price</th>
+									<th scope="col" class="col-auto">note</th>
+									<th scope="col" class="col-auto">islem</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:class="${proposal.VERIFY} ? 'bg-success' : 'bg-warning'"
+									th:each="proposal : ${proposalList}">
+									<td class="col-auto"><label
+										th:text="${proposal.PRODUCT.NAME}"></label></td>
+									<td class="col-auto"><label th:text="${proposal.PRICE}"></label></td>
+									<td class="col-auto"><label th:text="${proposal.NOTE}"></label></td>
+									<td class="col-auto">
+										<form th:if="!${proposal.VERIFY}" action="proposalVerify"
+											method="post">
+											<input type="hidden" th:value="${proposal.ID}"
+												name="proposalID" /> <input type="submit"
+												class="btn btn-primary" value="Onay">
+										</form>
+										<form action="proposalVerifyDelete" method="post">
+											<input type="hidden" th:value="${proposal.ID}"
+												name="proposalID" /> <input type="submit"
+												class="btn btn-danger" value="Sil">
+										</form>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+</body>
+</html>
+<script type="text/javascript" src="/js/bootstrap.bundle.js"></script>

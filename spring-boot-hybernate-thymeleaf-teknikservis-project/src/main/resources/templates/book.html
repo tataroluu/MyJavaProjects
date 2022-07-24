@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link href="/css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-2">
+      <!-- menuyu replace etmek için -->
+      <div th:replace="fragment/menu.html :: menu"></div>
+    </div>
+    <div class="col-10">
+      <h2>Randevu Onay</h2>
+      <form action="/book" method="post">
+        <label th:text="${bookingdate}"></label>
+        <label th:text="${serviceName}"></label>
+        <input type="text" name="serviceNote"/>
+        <select name="machineType">
+          <option value="1">Desktop</option>
+          <option value="2">Laptop</option>
+          <option value="3">Mac</option>
+        </select>
+        <button type="submit">Onayla</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>
+<script type="text/javascript" src="/js/bootstrap.bundle.js"></script>
+
+<!--<script>-->
+
+<!--    function saveBooking()-->
+<!--    {-->
+<!--        const machineSelection = document.forms.pickService.machine.value;-->
+<!--        const serviceSelection = document.forms.pickService.service.value;-->
+
+<!--        console.log(machineSelection + " : " + serviceSelection);-->
+
+<!--        -->
+<!--    }-->
+<!--</script>-->

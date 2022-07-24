@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text=#{site.title}></title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+<body>
+<div class="container-fluid">
+		<div class="row">
+		<div class="col-2">
+				<!-- menuyu replace etmek için -->
+				<div th:replace="fragment/menu.html :: menu"></div>
+			</div>
+			<div class="col-10">
+			
+				<table class="table table-striped table-bordered">
+					<thead class="table-dark">
+						<tr>
+							<th scope="col" class="col-auto" th:text="#{booking.systemUser.name}"></th>
+							<th scope="col" class="col-auto" th:text="#{booking.systemUser.email}"></th>
+							<th scope="col" class="col-auto" th:text="#{booking.service.name}"></th>
+							<th scope="col" class="col-auto" th:text="#{booking.bookingDate}"></th>
+							<th scope="col" class="col-auto" th:text="#{booking.note}"></th>
+							<th scope="col" class="col-auto" th:text="#{booking.completeOperation}"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="booking : ${booking_list}">
+							<td class="col-auto"><label th:text="${booking.USER.NAME}"></label></td>
+							<td class="col-auto"><label th:text="${booking.USER.EMAIL}"></label></td>
+							<td class="col-auto"><label th:text="${booking.SERVICE.NAME}"></label></td>
+							<td class="col-auto"><label th:text="${booking.BOOKINGDATE}"></label></td>
+							<td class="col-auto"><label th:text="${booking.NOTE}"></label></td>
+							<td class="col-auto">
+								<form action="/booking/list/completeOp" method="post">
+									<input id="BOOK_ID_ID" type="hidden" name="BOOK_ID"
+										th:value="${booking.ID}"> <input type="submit"
+										th:value="#{booking.done}" class="btn btn-outline-success">
+								</form>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</html>

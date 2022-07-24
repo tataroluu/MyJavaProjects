@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <link href="/css/bootstrap.css" rel="stylesheet">
+</head>
+<body class="hold-transition register-page">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2">
+            <!-- menuyu replace etmek için -->
+            <div th:replace="fragment/menu.html :: menu"></div>
+        </div>
+        <div class="col-10">
+            <h2 class="mt-4">Ürün alış sayfası</h2>
+            <a href="basket" class="btn btn-primary">Sepet</a>
+            <hr/>
+            <div class="container col-md-12  ">
+                <!--product-->
+                <div class="productcont">
+                    <div class="product " th:each="sale:${sales}">
+                        <img th:src="${sale.ID} + '.jpg' " style="width:150px; height:150px;"/>
+                        <h3 class="productname" th:text="${sale.PRODUCTID.NAME}"></h3>
+                        <p class="price" th:text="${sale.PRICE}"></p>
+                        <p class="price" th:text="${sale.NOTE}"></p>
+                        <form action="buy" method="post" >
+                            <input name="saleInput" type="hidden" th:value="${sale.ID} " >
+                            <button class="addtocart btn btn-primary" th:value="#{sale.add}">Sepete At</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="/js/bootstrap.bundle.js"></script>
+</html>

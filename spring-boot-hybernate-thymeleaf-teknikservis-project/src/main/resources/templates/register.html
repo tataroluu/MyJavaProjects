@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+<link href="/css/bootstrap.css" rel="stylesheet">
+</head>
+<body class="hold-transition register-page">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-2">
+				<!-- menuyu replace etmek için -->
+				<div th:replace="fragment/menu.html :: menu"></div>
+			</div>
+			<div class="col-10">
+				<div class="register-box">
+					<div class="card">
+						<div class="card-body register-card-body">
+							<p class="login-box-msg">Register a new account</p>
+							<form action="#" th:action="@{/register}" th:object="${userData}"
+								method="post">
+								<div class="alert alert-danger"
+									th:if="${#fields.hasErrors('*')}">
+									<p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+								</div>
+
+								<div class="input-group mb-3">
+									<input type="text" class="form-control" th:field="*{NAME}"
+										placeholder="Name" th:errorclass="is-invalid">
+
+								</div>
+
+								<div class="input-group mb-3">
+									<input type="email" class="form-control" th:field="*{EMAIL}"
+										placeholder="Email" th:errorclass="is-invalid">
+								</div>
+
+								<div class="input-group mb-3">
+									<input type="password" class="form-control"
+										th:field="*{PASSWORD}" placeholder="Password"
+										th:errorclass="is-invalid">
+								</div>
+
+								<div class="input-group mb-3">
+									<input type="password" class="form-control"
+										th:field="*{REPASSWORD}" placeholder="Retype password">
+								</div>
+
+								<div class="col-4">
+									<button type="submit" class="btn btn-primary btn-block">Register</button>
+								</div>
+								<div th:if="${signuperror}" class="col-auto mt-2">
+									<label class="alert alert-danger mb-2"
+										th:if="${passwordConfirm}" th:text="#{sifreHata}"></label>
+								</div>
+							</form>
+						</div>
+						<!-- /.form-box -->
+					</div>
+					<!-- /.card -->
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="/js/bootstrap.bundle.js"></script>
+</html>

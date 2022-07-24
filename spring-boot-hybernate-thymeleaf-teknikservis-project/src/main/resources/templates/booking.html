@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<div xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" th:fragment="menu"
+     th:with="url=${#httpServletRequest.requestURI}">
+<!--    <h5 class="page-link" sec:authorize="isAuthenticated()"-->
+<!--        th:text="${#authentication.getPrincipal().getUsername()}"></h5>-->
+    <!--    <h5 class="page-link" sec:authorize="isAuthenticated()"><a href="../booking.html">Randevu Al veya Görüntüle</a></h5>-->
+    <!--    <a href="/login" sec:authorize="!isAuthenticated()" class="page-link" th:text="#{site.login}"></a>-->
+</div>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="/css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2">
+            <!-- menuyu replace etmek için -->
+            <div th:replace="fragment/menu.html :: menu"></div>
+        </div>
+        <div class="col-10">
+            <h1>Randevu Al</h1>
+            <div class="card shadow">
+                <div class="card-body">
+                    <form action="book" method="get">
+                        <div>
+                            <select name="islem" class="form-control">
+                                <option th:each="service : ${servicesList}"
+                                        th:value="${service.ID}"
+                                        th:text="${service.NAME} + ' Süre: ' +${service.TIME}"></option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <input type="submit" th:value="#{book}"
+                                   class="btn btn-primary mt-3">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br>
+            <hr>
+            <br>
+            <h1>Randevularınız</h1>
+            <h1 th:text="${bookinglist.size}"></h1>
+            <div class="col-10">
+                <div class="col-10">
+                    <table class="table table-striped table-bordered">
+                        <thead class="table-dark">
+                        <tr>
+                            <th scope="col" class="col-auto">Tarih</th>
+                            <th scope="col" class="col-auto">Açıklama</th>
+                            <th scope="col" class="col-auto">Ücret</th>
+                            <th scope="col" class="col-auto">Servis</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="booking : ${bookinglist}">
+                            <td class="col-auto"><label th:text="${booking.BOOKINGDATE}"></label></td>
+                            <td class="col-auto"><label th:text="${booking.NOTE}"></label></td>
+                            <td class="col-auto"><label th:text="${booking.PRICE}"></label></td>
+                            <td class="col-auto"><label th:text="${booking.SERVICE.NAME}"></label></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+</body>
+</html>
+<script type="text/javascript" src="/js/bootstrap.bundle.js"></script>
+
+<!--<script>-->
+
+<!--    function saveBooking()-->
+<!--    {-->
+<!--        const machineSelection = document.forms.pickService.machine.value;-->
+<!--        const serviceSelection = document.forms.pickService.service.value;-->
+
+<!--        console.log(machineSelection + " : " + serviceSelection);-->
+
+<!--        -->
+<!--    }-->
+<!--</script>-->

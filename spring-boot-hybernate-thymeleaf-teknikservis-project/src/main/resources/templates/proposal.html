@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Sale</title>
+<link href="/css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-2">
+				<!-- menuyu replace etmek için -->
+				<div th:replace="fragment/menu.html :: menu"></div>
+			</div>
+
+			<div class="col-10">
+				<div class="card shadow">
+					<div class="card-body">
+						<!-- ogretmen_ekle ismindeki post mapping 'e gitceksin -->
+						<!-- th:object cnontroller dan data gelmesini bekler -->
+						<form action="proposal" method="post" th:object="${proposal}">
+
+							<div>
+								<label>Type:</label> <select name="saleType"
+									th:field="*{PRODUCT}">
+									<option value="1">CPU</option>
+									<option value="2">GPU</option>
+									<option value="3">RAM</option>
+									<option value="4">Motherboard</option>
+								</select>
+							</div>
+
+							<div>
+								<label>Note: </label> <input class="form-control" type="text"
+									th:field="*{NOTE}" required="required" autocomplete="off"
+									placeholder="Note" maxlength="200">
+							</div>
+
+							<div>
+								<label>Price:</label> <input class="form-control" type="text"
+									th:field="*{PRICE}" required="required" autocomplete="off"
+									maxlength="200">
+							</div>
+
+							<div>
+								<input type="submit" th:value="#{proposal.add}"
+									class="btn btn-primary mt-3">
+							</div>
+
+						</form>
+					</div>
+				</div>
+				<table class="table table-striped table-bordered">
+					<thead class="table-dark">
+						<tr>
+							<th scope="col" class="col-auto">product</th>
+							<th scope="col" class="col-auto">price</th>
+							<th scope="col" class="col-auto">note</th>
+							<th scope="col" class="col-auto">islem</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:class="${proposal.VERIFY} ? 'bg-success' : 'bg-warning'"
+							th:each="proposal : ${proposalList}">
+							<td class="col-auto"><label
+								th:text="${proposal.PRODUCT.NAME}"></label></td>
+							<td class="col-auto"><label th:text="${proposal.PRICE}"></label></td>
+							<td class="col-auto"><label th:text="${proposal.NOTE}"></label></td>
+							<td class="col-auto">
+								<form action="proposalDelete" method="post">
+									<input type="submit" class="btn btn-danger" value="Sil">
+								</form>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
+<script type="text/javascript" src="/js/bootstrap.bundle.js"></script>
