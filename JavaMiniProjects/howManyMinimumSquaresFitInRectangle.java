@@ -1,4 +1,4 @@
-public int howMuchSquare(int numHight, int numWidth){
+public int howManySquare(int numHight, int numWidth){
         ArrayList arl =new ArrayList<>();
 
               while (true)
